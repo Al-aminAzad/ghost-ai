@@ -9,12 +9,11 @@ Override Clerk appearance variables using the app’s existing CSS variables. Do
 ### Sign-in and sign-up pages:
 
 - large screens: simple two-panel layout
-- left: compact logo, tagline, short text-only feature list
+- left: compact logo, tagline, icon-assisted feature list (small icon container + bold title + one-line description per item)
 - right: centered Clerk form
-- small screens: form only
+- small screens: form only — left panel and feature list are hidden entirely
 - no gradients
 - no oversized hero sections
-- no feature cards
 - no scroll-heavy layouts
 
 Keep the layout minimal and professional.
