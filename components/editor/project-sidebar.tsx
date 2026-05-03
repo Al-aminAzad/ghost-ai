@@ -16,10 +16,10 @@ function ProjectItem({ project }: { project: Project }) {
   const { openRename, openDelete } = useEditor();
 
   return (
-    <div className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-subtle cursor-pointer">
+    <div className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-subtle">
       <span className="flex-1 text-sm text-copy-primary truncate">{project.name}</span>
       {project.owned && (
-        <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex items-center gap-0.5 opacity-0 hover:opacity-100 focus-within:opacity-100 transition-opacity">
           <Button
             variant="ghost"
             size="icon"
