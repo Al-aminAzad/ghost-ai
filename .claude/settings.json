@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push *)",
+      "Bash(npm install *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(list\\(d.get\\('exports',{}\\).keys\\(\\)\\), indent=2\\)\\)\")",
+      "Bash(mkdir -p /Users/al-aminazad/personal_project/ghost-ai/app/sign-in/'[[...sign-in]]')",
+      "Bash(mkdir -p /Users/al-aminazad/personal_project/ghost-ai/app/sign-up/'[[...sign-up]]')",
+      "Bash(npm run *)",
+      "Bash(git commit -m ' *)",
+      "Bash(npx next *)"
+    ]
+  }
+}
