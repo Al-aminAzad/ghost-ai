@@ -8,7 +8,8 @@
       "Bash(mkdir -p /Users/al-aminazad/personal_project/ghost-ai/app/sign-up/'[[...sign-up]]')",
       "Bash(npm run *)",
       "Bash(git commit -m ' *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(npx prisma *)"
     ]
   }
 }
