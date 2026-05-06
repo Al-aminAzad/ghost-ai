@@ -18,7 +18,8 @@ export function ProjectDialogs() {
     dialog,
     formName,
     setFormName,
-    slug,
+    roomId,
+    isLoading,
     closeDialog,
     handleCreate,
     handleRename,
@@ -62,18 +63,18 @@ export function ProjectDialogs() {
             />
             {formName && (
               <p className="text-xs text-copy-muted font-mono">
-                slug: <span className="text-brand">{slug || "—"}</span>
+                room: <span className="text-brand">{roomId || "—"}</span>
               </p>
             )}
           </div>
 
           <DialogFooter className="border-t-0 bg-transparent p-0 -mx-0 -mb-0 mt-1">
-            <Button variant="outline" onClick={closeDialog}>
+            <Button variant="outline" onClick={closeDialog} disabled={isLoading}>
               Cancel
             </Button>
             <Button
               onClick={handleCreate}
-              disabled={!formName.trim()}
+              disabled={!formName.trim() || isLoading}
             >
               Create
             </Button>
@@ -107,12 +108,12 @@ export function ProjectDialogs() {
           />
 
           <DialogFooter className="border-t-0 bg-transparent p-0 -mx-0 -mb-0 mt-1">
-            <Button variant="outline" onClick={closeDialog}>
+            <Button variant="outline" onClick={closeDialog} disabled={isLoading}>
               Cancel
             </Button>
             <Button
               onClick={handleRename}
-              disabled={!formName.trim()}
+              disabled={!formName.trim() || isLoading}
             >
               Rename
             </Button>
@@ -138,10 +139,10 @@ export function ProjectDialogs() {
           </DialogHeader>
 
           <DialogFooter className="border-t-0 bg-transparent p-0 -mx-0 -mb-0 mt-1">
-            <Button variant="outline" onClick={closeDialog}>
+            <Button variant="outline" onClick={closeDialog} disabled={isLoading}>
               Cancel
             </Button>
-            <Button variant="destructive" onClick={handleDelete}>
+            <Button variant="destructive" onClick={handleDelete} disabled={isLoading}>
               Delete
             </Button>
           </DialogFooter>

@@ -9,7 +9,12 @@
       "Bash(npm run *)",
       "Bash(git commit -m ' *)",
       "Bash(npx next *)",
-      "Bash(npx prisma *)"
+      "Bash(npx prisma *)",
+      "Bash(node -e \"console.log\\(require\\('/Users/al-aminazad/personal_project/ghost-ai/node_modules/next/package.json'\\).version\\)\")",
+      "Bash(mkdir -p /Users/al-aminazad/personal_project/ghost-ai/app/api/projects/\\\\[projectId\\\\])"
+    ],
+    "additionalDirectories": [
+      "/Users/al-aminazad/personal_project/ghost-ai/app/api/projects"
     ]
   }
 }

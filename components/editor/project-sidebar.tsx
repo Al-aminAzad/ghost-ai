@@ -5,21 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEditor } from "@/components/editor/editor-context";
-import { Project } from "@/lib/mock-projects";
+import type { ProjectSummary } from "@/lib/projects";
 
 interface ProjectSidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-function ProjectItem({ project }: { project: Project }) {
+function ProjectItem({ project, owned }: { project: ProjectSummary; owned: boolean }) {
   const { openRename, openDelete } = useEditor();
 
   return (
-    <div className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-subtle">
+    <div className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-subtle cursor-pointer">
       <span className="flex-1 text-sm text-copy-primary truncate">{project.name}</span>
-      {project.owned && (
-        <div className="flex items-center gap-0.5 opacity-0 hover:opacity-100 focus-within:opacity-100 transition-opacity">
+      {owned && (
+        <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
           <Button
             variant="ghost"
             size="icon"
@@ -51,16 +51,12 @@ function ProjectItem({ project }: { project: Project }) {
 }
 
 export function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
-  const { projects, openCreate } = useEditor();
-
-  const ownedProjects = projects.filter((p) => p.owned);
-  const sharedProjects = projects.filter((p) => !p.owned);
+  const { ownedProjects, sharedProjects, openCreate } = useEditor();
 
   if (!isOpen) return null;
 
   return (
     <>
-      {/* Mobile backdrop scrim */}
       <div
         className="fixed inset-0 z-30 bg-black/50 sm:hidden"
         onClick={onClose}
@@ -99,7 +95,7 @@ export function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
               <ScrollArea className="h-full px-2">
                 <div className="flex flex-col gap-0.5 py-1">
                   {ownedProjects.map((project) => (
-                    <ProjectItem key={project.id} project={project} />
+                    <ProjectItem key={project.id} project={project} owned />
                   ))}
                 </div>
               </ScrollArea>
@@ -115,7 +111,7 @@ export function ProjectSidebar({ isOpen, onClose }: ProjectSidebarProps) {
               <ScrollArea className="h-full px-2">
                 <div className="flex flex-col gap-0.5 py-1">
                   {sharedProjects.map((project) => (
-                    <ProjectItem key={project.id} project={project} />
+                    <ProjectItem key={project.id} project={project} owned={false} />
                   ))}
                 </div>
               </ScrollArea>
