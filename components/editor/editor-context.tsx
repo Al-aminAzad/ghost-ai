@@ -1,14 +1,29 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { useProjectDialogs } from "@/hooks/use-project-dialogs";
+import { useProjectActions } from "@/hooks/use-project-actions";
+import type { ProjectSummary } from "@/lib/projects";
 
-type EditorContextValue = ReturnType<typeof useProjectDialogs>;
+interface EditorContextValue extends ReturnType<typeof useProjectActions> {
+  ownedProjects: ProjectSummary[];
+  sharedProjects: ProjectSummary[];
+}
 
 const EditorContext = createContext<EditorContextValue | null>(null);
 
-export function EditorProvider({ children }: { children: React.ReactNode }) {
-  const value = useProjectDialogs();
+interface EditorProviderProps {
+  children: React.ReactNode;
+  ownedProjects: ProjectSummary[];
+  sharedProjects: ProjectSummary[];
+}
+
+export function EditorProvider({
+  children,
+  ownedProjects,
+  sharedProjects,
+}: EditorProviderProps) {
+  const actions = useProjectActions();
+  const value: EditorContextValue = { ...actions, ownedProjects, sharedProjects };
   return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>;
 }
 
