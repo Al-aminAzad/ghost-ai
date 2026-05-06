@@ -4,6 +4,7 @@ import { X, Plus, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { usePathname } from "next/navigation";
 import { useEditor } from "@/components/editor/editor-context";
 import type { ProjectSummary } from "@/lib/projects";
 
@@ -14,10 +15,12 @@ interface ProjectSidebarProps {
 
 function ProjectItem({ project, owned }: { project: ProjectSummary; owned: boolean }) {
   const { openRename, openDelete } = useEditor();
+  const pathname = usePathname();
+  const isActive = pathname === `/editor/${project.id}`;
 
   return (
-    <div className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-subtle cursor-pointer">
-      <span className="flex-1 text-sm text-copy-primary truncate">{project.name}</span>
+    <div className={`group flex items-center gap-2 px-3 py-2 rounded-xl cursor-pointer transition-colors ${isActive ? "bg-accent-dim text-brand" : "hover:bg-subtle"}`}>
+      <span className={`flex-1 text-sm truncate ${isActive ? "text-brand" : "text-copy-primary"}`}>{project.name}</span>
       {owned && (
         <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
           <Button
